@@ -3,6 +3,12 @@ import { render, cleanup } from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect';
 import Nav from '..';
 
+const categories = [
+    { name: 'portraits', description: 'Portraits of people in my life' }
+  ]
+  const mockCurrentCategory = jest.fn();
+  const mockSetCurrentCategory = jest.fn();
+
 //call the cleanup() using the afterEach global function from jest
 // after each test wont have any leftover memory data could give us false results
 afterEach(cleanup)
@@ -10,8 +16,12 @@ afterEach(cleanup)
 describe('Nav component', () => {
     //baseline test
     it('renders', () => {
-        render(<Nav />);
-    });
+        render(<Nav
+          categories={categories}
+          setCurrentCategory={mockSetCurrentCategory}
+          currentCategory={mockCurrentCategory}
+        />);
+      })
 
     //snapshot test
     it('matches snapshot', () => {
