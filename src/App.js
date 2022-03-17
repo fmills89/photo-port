@@ -3,9 +3,12 @@ import React, { useState } from 'react';
 import Nav from './components/Nav';
 import About from './components/About';
 import Gallery from './components/Gallery';
+import Contactform from './components/Contact';
 import './App.css';
 
 function App() {
+  const [contactSelected, setContactSelected] = useState(false);
+
   const [categories] = useState([
     { name: "commercial", description: "Photos of grocery stores, food trucks, and other commercial projects",},
     { name: "portraits", description: "Portraits of people in my life" },
@@ -24,9 +27,16 @@ function App() {
         currentCategory={currentCategory}
       ></Nav>
       <main>
-        {/* pass the current cat the cat selected by the user */}
-        <Gallery currentCategory={currentCategory}></Gallery>
-        <About></About>
+        {/* using ternary operator to enable conditional rendering */}
+        if {!contactSelected ? (
+          // <> </> react fragments useful tools in react to allow mult elems to be grouped together
+          <>
+            <Gallery currentCategory={currentCategory}></Gallery>
+            <About></About>
+          </>
+        ) : (
+          <Contactform></Contactform>
+        )}
       </main>
     </div>
   );
